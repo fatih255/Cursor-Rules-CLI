@@ -1,0 +1,48 @@
+---
+description: Global rules and documentation index
+---
+
+# Cursor Rules are extra documentation provided by the user to help the AI understand the codebase.
+
+## [YOUR_DOC_FOLDER]
+- [example-doc.md](mdc:.cursor/docs/[YOUR_DOC_FOLDER]/example-doc.md)
+
+## react
+- [build.md](mdc:.cursor/docs/react/build.md)
+- [development.md](mdc:.cursor/docs/react/development.md)
+- [performance.md](mdc:.cursor/docs/react/performance.md)
+- [pre-commit.md](mdc:.cursor/docs/react/pre-commit.md)
+- [readability.md](mdc:.cursor/docs/react/readability.md)
+- [security.md](mdc:.cursor/docs/react/security.md)
+- [testing.md](mdc:.cursor/docs/react/testing.md)
+
+## react/packages/create-t3-app-docs
+- [Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/Create_T3_App.md)
+- [Docker___Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/Docker___Create_T3_App.md)
+- [Drizzle___Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/Drizzle___Create_T3_App.md)
+- [Environment_Variables___Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/Environment_Variables___Create_T3_App.md)
+- [Examples___Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/Examples___Create_T3_App.md)
+- [FAQ___Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/FAQ___Create_T3_App.md)
+- [First_Steps___Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/First_Steps___Create_T3_App.md)
+- [Folder_Structure__App____Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/Folder_Structure__App____Create_T3_App.md)
+- [Folder_Structure__Pages____Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/Folder_Structure__Pages____Create_T3_App.md)
+- [GitHub___t3_oss_create_t3_app__The_best_way_to_start_a_full_stack__typesafe_Next_js_app.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/GitHub___t3_oss_create_t3_app__The_best_way_to_start_a_full_stack__typesafe_Next_js_app.md)
+- [History_for_www_src_pages_en_installation_mdx___t3_oss_create_t3_app___GitHub.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/History_for_www_src_pages_en_installation_mdx___t3_oss_create_t3_app___GitHub.md)
+- [Installation___Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/Installation___Create_T3_App.md)
+- [Introduction___Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/Introduction___Create_T3_App.md)
+- [Netlify___Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/Netlify___Create_T3_App.md)
+- [NextAuth_js___Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/NextAuth_js___Create_T3_App.md)
+- [Next_js___Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/Next_js___Create_T3_App.md)
+- [Other_Recommendations___Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/Other_Recommendations___Create_T3_App.md)
+- [Prisma___Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/Prisma___Create_T3_App.md)
+- [T3_Collection___Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/T3_Collection___Create_T3_App.md)
+- [Tailwind_CSS___Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/Tailwind_CSS___Create_T3_App.md)
+- [Theo_s_Typesafe_Cult.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/Theo_s_Typesafe_Cult.md)
+- [TypeScript___Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/TypeScript___Create_T3_App.md)
+- [Vercel__Build_and_deploy_the_best_web_experiences_with_the_Frontend_Cloud.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/Vercel__Build_and_deploy_the_best_web_experiences_with_the_Frontend_Cloud.md)
+- [Vercel___Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/Vercel___Create_T3_App.md)
+- [Why_CT3A____Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/Why_CT3A____Create_T3_App.md)
+- [create_t3_app_www_TRANSLATIONS_md_at_main___t3_oss_create_t3_app___GitHub.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/create_t3_app_www_TRANSLATIONS_md_at_main___t3_oss_create_t3_app___GitHub.md)
+- [create_t3_app_www_src_pages_en_installation_mdx_at_main___t3_oss_create_t3_app___GitHub.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/create_t3_app_www_src_pages_en_installation_mdx_at_main___t3_oss_create_t3_app___GitHub.md)
+- [tRPC___Create_T3_App.md](mdc:.cursor/docs/react/packages/create-t3-app-docs/tRPC___Create_T3_App.md)
+

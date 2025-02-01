@@ -1,0 +1,17 @@
+{
+  "name": "cursor-rules-cli",
+  "version": "1.0.0",
+  "description": "CLI tool to generate Cursor rules documentation",
+  "main": "scripts/generate-global-rules.js",
+  "bin": {
+    "cursor-rules": "./scripts/generate-global-rules.js"
+  },
+  "scripts": {
+    "install-cli": "./setup.sh",
+    "generate-rules": "node scripts/generate-global-rules.js"
+  },
+  "dependencies": {
+    "commander": "^11.1.0",
+    "chalk": "^4.1.2"
+  }
+} 
