@@ -16,7 +16,7 @@ cd cursor-rules
 pnpm install-cli
 
 # Or with npm
-npm run setup
+npm run install-cli
 ```
 
 That's it! The CLI is now installed globally on your system.
