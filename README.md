@@ -2,6 +2,10 @@
 
 A command-line tool to automatically generate and manage Cursor rules documentation.
 
+![Cursor folder tagging feature](https://github.com/user-attachments/assets/d30f0b7b-95c4-4396-9cfc-c6c2ffc52331)  
+
+![Cursor Rules CLI](https://github.com/user-attachments/assets/0ffa29f5-febb-4ab0-9304-306a371f772c)
+
 ## Quick Start
 
 ```bash
