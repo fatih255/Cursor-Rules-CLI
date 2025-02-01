@@ -8,7 +8,7 @@ A command-line tool to automatically generate and manage Cursor rules documentat
 # Clone and setup
 git clone https://github.com/yourusername/cursor-rules.git
 cd cursor-rules
-pnpm setup
+pnpm install-cli
 
 # Or with npm
 npm run setup
