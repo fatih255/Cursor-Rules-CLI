@@ -5,17 +5,13 @@ A command-line tool to automatically generate and manage Cursor rules documentat
 ## Quick Start
 
 ```bash
-# Clone the repository
+# Clone and setup
 git clone https://github.com/yourusername/cursor-rules.git
 cd cursor-rules
-
-# Install with pnpm (recommended)
-pnpm install
-pnpm install-cli
+pnpm setup
 
 # Or with npm
-npm install
-npm run install-cli
+npm run setup
 ```
 
 That's it! The CLI is now installed globally on your system.
@@ -30,46 +26,59 @@ cursor-rules
 cursor-rules --examples
 ```
 
-## Options
+## Documentation Structure
 
-- `--examples`: Show example usage patterns
+Create a `.cursor/docs/@content.md` file to organize your documentation:
 
-## Example Directory Structure
+```markdown
+# Framework Documentation
+
+## React Guidelines
+{{@import @react}}
+
+## API Documentation
+{{@import @api}}
+
+## Examples
+{{@import @examples}}
+```
+
+## Import Syntax
+
+Use the `@` prefix to import documentation from `.cursor/docs/`:
+
+```markdown
+# Import all .md files from a directory
+{{@import @react}}              -> .cursor/docs/react/**/*.md
+{{@import @api}}               -> .cursor/docs/api/**/*.md
+
+# Import from subdirectories
+{{@import @react/components}}  -> .cursor/docs/react/components/**/*.md
+```
+
+## Directory Structure
 
 ```
 .cursor/
-└── docs/
-    ├── components/
-    │   └── button.md
-    └── api/
-        └── endpoints.md
+├── docs/
+│   ├── @content.md          # Main documentation file
+│   ├── react/              # React documentation
+│   │   ├── components.md
+│   │   └── hooks.md
+│   └── api/               # API documentation
+│       └── endpoints.md
+└── rules/
+    └── global.mdc        # Auto-generated index
 ```
 
 ## Development
 
 ```bash
 # Just generate documentation index without installation
-pnpm generate-rules
+pnpm generate
 
 # Or with npm
-npm run generate-rules
-```
-
-## Troubleshooting
-
-If you get pnpm store errors:
-
-```bash
-# 1. Clean old installations
-rm -rf ~/Library/pnpm/global/5/node_modules/cursor-rules-cli
-rm -rf ~/.pnpm-store/v3/tmp/cursor-rules-cli
-
-# 2. Update pnpm
-npm install -g pnpm@latest
-
-# 3. Install dependencies and CLI
-pnpm install
-pnpm install-cli
+npm run generate
 ```
 
 ## Uninstalling

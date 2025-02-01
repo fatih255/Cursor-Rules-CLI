@@ -22,88 +22,190 @@ function getAllFiles(dirPath, arrayOfFiles = [], extension = null) {
   return arrayOfFiles;
 }
 
+function parseMetadata(content) {
+  const metadataRegex = /^---([\s\S]*?)---/;
+  const match = content.match(metadataRegex);
+  if (!match) return { content, metadata: {} };
+
+  const metadataStr = match[1];
+  const metadata = {};
+  metadataStr.split('\n').forEach(line => {
+    const [key, ...values] = line.split(':').map(s => s.trim());
+    if (key && values.length) metadata[key] = values.join(':');
+  });
+
+  return {
+    content: content.slice(match[0].length).trim(),
+    metadata
+  };
+}
+
+function logHeader(message) {
+  console.log(chalk.blue(`\n🔄 ${message}`));
+}
+
+function logSubHeader(message) {
+  console.log(chalk.gray(`   ${message}`));
+}
+
+function logImportStart(importPath, fullPath) {
+  const shortPath = fullPath.split('/docs/')[1];
+  console.log(chalk.blue(`\n📂 ${importPath}`));
+  console.log(chalk.gray(`   → .cursor/docs/${shortPath}`));
+}
+
+function logImportSuccess(files, importPath) {
+  const fileWord = files.length === 1 ? 'file' : 'files';
+  console.log(chalk.green(`   ✓ ${files.length} ${fileWord} found`));
+}
+
+function logImportWarning(message) {
+  console.log(chalk.yellow(`   ⚠️  ${message}`));
+}
+
+function logSuccess(filePath) {
+  const shortPath = filePath.split('/docs/')[1] || filePath;
+  console.log(chalk.green("\n✨ Documentation generated successfully"));
+  console.log(chalk.gray(`   → ${shortPath}`));
+  console.log(); // Empty line at the end
+}
+
+function processImports(content, basePath, currentDir) {
+  const importRegex = /{{([^}]+)}}/g;
+  return content.replace(importRegex, (match, importStr) => {
+    const importPath = importStr.trim();
+    
+    if (!importPath.startsWith('@')) return match;
+
+    const actualPath = path.join(basePath, '.cursor/docs', importPath.slice(1));
+    
+    logImportStart(importPath, actualPath);
+    
+    if (!fs.existsSync(actualPath)) {
+      logImportWarning('Directory not found');
+      return '';
+    }
+
+    if (fs.statSync(actualPath).isDirectory()) {
+      const files = getAllFiles(actualPath, [], ".md")
+        .sort()
+        .map(file => {
+          const content = fs.readFileSync(file, 'utf-8');
+          const { metadata } = parseMetadata(content);
+          const relativePath = file.replace(basePath + path.sep, '').replace(/\\/g, '/');
+          return {
+            title: metadata.title || path.basename(file, '.md'),
+            description: metadata.description || '',
+            path: relativePath
+          };
+        });
+
+      if (files.length === 0) {
+        logImportWarning('No markdown files found');
+        return '';
+      }
+
+      logImportSuccess(files, importPath);
+      return files.map(file => 
+        `### ${file.title}\n${file.description ? file.description + '\n\n' : ''}[View Documentation](mdc:${file.path})\n`
+      ).join('\n');
+    } else {
+      const content = fs.readFileSync(actualPath, 'utf-8');
+      return processContent(content, basePath, path.dirname(actualPath));
+    }
+  });
+}
+
+function processContent(content, basePath, currentDir) {
+  const { metadata, content: mainContent } = parseMetadata(content);
+  return processImports(mainContent, basePath, currentDir);
+}
+
 function generateGlobalRules() {
   const basePath = process.cwd();
   const docsDir = path.join(basePath, ".cursor", "docs");
   const rulesDir = path.join(basePath, ".cursor", "rules");
-
-  // Ensure rules directory exists
+  
   if (!fs.existsSync(rulesDir)) {
     fs.mkdirSync(rulesDir, { recursive: true });
   }
-
+  
   const globalMdcPath = path.join(rulesDir, "global.mdc");
+  const contentPath = path.join(docsDir, "@content.md");
 
-  // Check if .cursor directory exists
   if (!fs.existsSync(path.join(basePath, ".cursor"))) {
-    console.error(chalk.red("Error: .cursor directory not found"));
-    console.log(chalk.yellow("Make sure you're in a Cursor project directory"));
+    console.error(chalk.red("\n❌ Error: .cursor directory not found"));
+    console.log(chalk.yellow("   Make sure you're in a Cursor project directory"));
     process.exit(1);
   }
 
-  console.log(chalk.blue("Processing documentation..."));
+  logHeader("Processing documentation");
 
-  let content = `---
+  let content = '';
+  
+  if (fs.existsSync(contentPath)) {
+    logSubHeader("Found @content.md");
+    const rawContent = fs.readFileSync(contentPath, 'utf-8');
+    const { metadata, content: mainContent } = parseMetadata(rawContent);
+    
+    content = `---
+description: ${metadata.description || 'Global rules and documentation index'}
+---
+
+# ${metadata.title || 'Cursor Rules Documentation'}
+
+${processContent(rawContent, basePath, docsDir)}\n`;
+  } else {
+    // Default content generation
+    content = `---
 description: Global rules and documentation index
 ---
 
-# Cursor Rules are extra documentation provided by the user to help the AI understand the codebase.\n\n`;
+# Cursor Rules Documentation\n\n`;
 
-  // Process all documentation files
-  if (fs.existsSync(docsDir)) {
-    const docCategories = new Map();
+    if (fs.existsSync(docsDir)) {
+      const docCategories = new Map();
+      const docFiles = [...getAllFiles(docsDir, [], ".md"), ...getAllFiles(docsDir, [], ".mdc")].sort();
 
-    // Get all .md and .mdc files
-    const docFiles = [
-      ...getAllFiles(docsDir, [], ".md"),
-      ...getAllFiles(docsDir, [], ".mdc"),
-    ].sort();
+      console.log(chalk.gray(`Found ${docFiles.length} documentation files`));
 
-    console.log(chalk.gray(`Found ${docFiles.length} documentation files`));
-
-    // Categorize files by their parent directory
-    docFiles.forEach((file) => {
-      const relativePath = file
-        .replace(basePath + path.sep, "")
-        .replace(/\\/g, "/");
-      const displayName = path.basename(file);
-      const docFolder = path
-        .dirname(relativePath)
-        .split("/")
-        .slice(2)
-        .join("/");
-
-      if (!docCategories.has(docFolder)) {
-        docCategories.set(docFolder, []);
-      }
-      docCategories.get(docFolder).push({ displayName, relativePath });
-    });
-
-    // Add documentation to content
-    for (const [docFolder, files] of docCategories) {
-      const isRootFolder = docFolder === "";
-      if (isRootFolder) continue;
-
-      console.log(chalk.gray(`Processing documentation for: ${docFolder}`));
-      content += `## ${docFolder}\n`;
-      files.forEach(({ displayName, relativePath }) => {
-        content += `- [${displayName}](mdc:${relativePath})\n`;
+      docFiles.forEach(file => {
+        if (path.basename(file) === '@content.md') return;
+        
+        const relativePath = file.replace(basePath + path.sep, "").replace(/\\/g, "/");
+        const fileContent = fs.readFileSync(file, 'utf-8');
+        const { metadata } = parseMetadata(fileContent);
+        const displayName = metadata.title || path.basename(file);
+        const category = path.dirname(relativePath).split("/").slice(2).join("/");
+        
+        if (!docCategories.has(category)) {
+          docCategories.set(category, []);
+        }
+        docCategories.get(category).push({ 
+          displayName, 
+          relativePath,
+          description: metadata.description || ''
+        });
       });
-      content += "\n";
+
+      for (const [category, files] of docCategories) {
+        if (category === '') continue;
+        console.log(chalk.gray(`Processing category: ${category}`));
+        content += `## ${category}\n`;
+        files.forEach(({ displayName, relativePath, description }) => {
+          content += `### ${displayName}\n`;
+          if (description) content += `${description}\n\n`;
+          content += `[View Documentation](mdc:${relativePath})\n\n`;
+        });
+      }
     }
-  } else {
-    console.log(
-      chalk.yellow("No docs directory found. Creating empty global.mdc file.")
-    );
   }
 
-  // Write the content to global.mdc
   try {
     fs.writeFileSync(globalMdcPath, content);
-    console.log(chalk.green("✓ Successfully generated global.mdc"));
-    console.log(chalk.gray("\nFile location:"), chalk.white(globalMdcPath));
+    logSuccess(globalMdcPath);
   } catch (error) {
-    console.error(chalk.red("Error writing global.mdc:"), error.message);
+    console.error(chalk.red("\n❌ Error writing global.mdc:"), error.message);
     process.exit(1);
   }
 }
