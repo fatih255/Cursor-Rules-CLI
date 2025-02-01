@@ -34,13 +34,13 @@ Create a `.cursor/docs/@content.md` file to organize your documentation:
 # Framework Documentation
 
 ## React Guidelines
-{{@import @react}}
+{{@react}}
 
 ## API Documentation
-{{@import @api}}
+{{@api}}
 
 ## Examples
-{{@import @examples}}
+{{@examples}}
 ```
 
 ## Import Syntax
@@ -49,11 +49,11 @@ Use the `@` prefix to import documentation from `.cursor/docs/`:
 
 ```markdown
 # Import all .md files from a directory
-{{@import @react}}              -> .cursor/docs/react/**/*.md
-{{@import @api}}               -> .cursor/docs/api/**/*.md
+{{@react}}              -> .cursor/docs/react/**/*.md
+{{@api}}               -> .cursor/docs/api/**/*.md
 
 # Import from subdirectories
-{{@import @react/components}}  -> .cursor/docs/react/components/**/*.md
+{{@react/components}}  -> .cursor/docs/react/components/**/*.md
 ```
 
 ## Directory Structure
