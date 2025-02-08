@@ -108,10 +108,10 @@ globs: *.ts, *.tsx, *.js, *.jsx, *.py, *.java, *.json, Dockerfile, docker-compos
 
 ```bash
 # Just generate documentation index without installation
-pnpm generate
+pnpm generate-rules
 
 # Or with npm
-npm run generate
+npm run generate-rules
 ```
 
 ## Uninstalling
