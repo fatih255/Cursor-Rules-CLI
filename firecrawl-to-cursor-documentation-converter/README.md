@@ -8,7 +8,7 @@ curl --location 'http://localhost:3000/api/generate-mdc-docs' \
 --data '{
   "firecrawlRequest": {
     "url": "https://api.firecrawl.dev/v1/scrape",
-    "apiKey": "fc-3b91bbeb13de47ce9c821eec7e561c8c",
+    "apiKey": "YOUR_FIRECRAWL_API_KEY",
     "body": {
       "url": "https://www.cursor.com/en/blog/cpc"
     }
@@ -27,7 +27,7 @@ curl --location 'http://localhost:3000/api/generate-mdc-docs' \
 --data '{
     "firecrawlRequest": {
         "url": "https://api.firecrawl.dev/v1/batch/scrape",
-        "apiKey": "fc-3b91bbeb13de47ce9c821eec7e561c8c",
+        "apiKey": "YOUR_FIRECRAWL_API_KEY",
         "body": {
             "urls": [
                 "https://www.cursor.com/blog/cpc",
@@ -49,7 +49,7 @@ curl --location 'http://localhost:3000/api/generate-mdc-docs' \
 --data '{
     "firecrawlRequest": {
         "url": "https://api.firecrawl.dev/v1/crawl",
-        "apiKey": "fc-3b91bbeb13de47ce9c821eec7e561c8c",
+        "apiKey": "YOUR_FIRECRAWL_API_KEY",
         "body": {
             "url": "https://nextjs.org/",
             "includePaths": [
