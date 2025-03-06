@@ -1,7 +1,7 @@
 ---
 title: API Reference: CLI | Next.js
 description: API Reference for the Next.js Command Line Interface (CLI) tools.
-globs: src/**/*.rs
+globs: src/**/*.tsx
 ---
 
 from: https://nextjs.org/docs/app/api-reference/cli
