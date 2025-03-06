@@ -13,22 +13,31 @@ A command-line tool to automatically generate and manage Cursor rules documentat
 The main tool for generating and managing Cursor documentation.
 
 ### 2. Firecrawl to Cursor Documentation Converter
-A lightweight service that converts Firecrawl API scraped content into formatted documentation files (.mdc) for Cursor.
+A lightweight Express.js service that converts Firecrawl API scraped content into formatted documentation files (.mdc) for Cursor. It allows you to easily import external documentation from websites into your Cursor rules.
 
-You can use the Firecrawl API response directly with this service to automatically create properly formatted documentation files in the `./docs` directory. This simplifies the process of importing external documentation into your Cursor rules.
+Features:
+- Supports single URL scraping, batch URL processing, and website crawling
+- Automatically formats markdown with proper structure
+- Adds appropriate frontmatter with globs for Cursor rules
+- Handles API polling for asynchronous Firecrawl operations
+- Beautifies documentation with consistent formatting
 
 ```bash
 # Navigate to the converter directory
-cd firecrawl-to-doc-files-cursor
+cd firecrawl-to-cursor-documentation-converter
 
 # Install dependencies
 npm install
+# or
+pnpm install
 
 # Start the service
 npm start
 ```
 
-The converter service runs on port 3000 by default and provides an API endpoint to transform Firecrawl scraped documentation into properly formatted MDC files with frontmatter. For more details, see the [Firecrawl Converter README](firecrawl-response-to-cursor-mdc/README.md).
+The converter service runs on port 3000 by default and provides an API endpoint to transform Firecrawl scraped documentation into properly formatted MDC files. Generated documentation files are saved in the `./docs` directory.
+
+For usage examples and API documentation, see the [Firecrawl Converter README](firecrawl-to-cursor-documentation-converter/README.md).
 
 ## Quick Start
 
