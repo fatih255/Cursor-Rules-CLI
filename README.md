@@ -28,7 +28,7 @@ npm install
 npm start
 ```
 
-The converter service runs on port 3000 by default and provides an API endpoint to transform Firecrawl scraped documentation into properly formatted MDC files with frontmatter. For more details, see the [Firecrawl Converter README](firecrawl-to-doc-files-cursor/README.md).
+The converter service runs on port 3000 by default and provides an API endpoint to transform Firecrawl scraped documentation into properly formatted MDC files with frontmatter. For more details, see the [Firecrawl Converter README](firecrawl-response-to-cursor-mdc/README.md).
 
 ## Quick Start
 
