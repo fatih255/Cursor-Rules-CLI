@@ -7,6 +7,29 @@ A command-line tool to automatically generate and manage Cursor rules documentat
 ## Cursor Rules CLI - Result
 <img src="https://github.com/user-attachments/assets/0ffa29f5-febb-4ab0-9304-306a371f772c" alt="Cursor Rules CLI" width="700" />
 
+## Components
+
+### 1. Cursor Rules CLI
+The main tool for generating and managing Cursor documentation.
+
+### 2. Firecrawl to Cursor Documentation Converter
+A lightweight service that converts Firecrawl API scraped content into formatted documentation files (.mdc) for Cursor.
+
+You can use the Firecrawl API response directly with this service to automatically create properly formatted documentation files in the `./docs` directory. This simplifies the process of importing external documentation into your Cursor rules.
+
+```bash
+# Navigate to the converter directory
+cd firecrawl-to-doc-files-cursor
+
+# Install dependencies
+npm install
+
+# Start the service
+npm start
+```
+
+The converter service runs on port 3000 by default and provides an API endpoint to transform Firecrawl scraped documentation into properly formatted MDC files with frontmatter. For more details, see the [Firecrawl Converter README](firecrawl-to-doc-files-cursor/README.md).
+
 ## Quick Start
 
 ```bash
