@@ -10,6 +10,7 @@ app.use(express.json({ limit: "50mb" }));
 // Increase URL-encoded payload limit as well
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
+const MAX_ATTEMPTS = 999999; // firecrawl api is so slow that we need to wait for a long time
 const API_TIMEOUT = 7200000;
 // Default polling interval (2 seconds)
 const POLLING_INTERVAL = 2000 ;
@@ -106,7 +107,7 @@ async function pollJobStatus(jobId, apiKey, operationType) {
   let statusResponse;
   let attempts = 0;
 
-  while (!completed && attempts < 60) {
+  while (!completed && attempts < MAX_ATTEMPTS) {
     // Limit to 60 attempts (2 minutes with 2s interval)
     attempts++;
     try {
