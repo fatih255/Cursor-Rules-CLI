@@ -10,10 +10,9 @@ app.use(express.json({ limit: "50mb" }));
 // Increase URL-encoded payload limit as well
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
-// Default timeout for API requests (30 seconds)
-const API_TIMEOUT = 30000;
+const API_TIMEOUT = 7200000;
 // Default polling interval (2 seconds)
-const POLLING_INTERVAL = 2000;
+const POLLING_INTERVAL = 2000 ;
 
 // Markdown beautifier function
 async function beautifyMarkdown(markdown) {
