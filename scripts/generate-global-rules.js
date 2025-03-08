@@ -87,7 +87,7 @@ function processImports(content, basePath, currentDir) {
     }
 
     if (fs.statSync(actualPath).isDirectory()) {
-      const files = getAllFiles(actualPath, [], ".md")
+      const files = [...getAllFiles(actualPath, [], ".md"), ...getAllFiles(actualPath, [], ".mdc")]
         .sort()
         .map(file => {
           const content = fs.readFileSync(file, 'utf-8');
@@ -218,9 +218,9 @@ function showExamples() {
 .cursor/
 └── docs/
     ├── components/
-    │   └── button.md
+    │   └── button.md or button.mdc
     └── api/
-        └── endpoints.md`);
+        └── endpoints.md or endpoints.mdc`);
 
   console.log(chalk.yellow("\nCommand:"));
   console.log(`
